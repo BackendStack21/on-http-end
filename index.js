@@ -33,7 +33,7 @@ function map (status, headers, data, encoding) {
     status: status,
     headers: headers,
     data: data,
-    encoding: encoding
+    encoding: typeof encoding === 'string' ? encoding : null
   }
 }
 
