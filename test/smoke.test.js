@@ -39,6 +39,15 @@ describe('on-http-end', () => {
     res.end('world')
   })
 
+  it('should accumulate content and encoding', function (done) {
+    onFinished(res, (payload) => {
+      expect(payload.encoding).to.equal('utf-8')
+      done()
+    })
+
+    res.end('Hello', 'utf-8')
+  })
+
   it('should accumulate non-string content', function (done) {
     onFinished(res, (payload) => {
       expect(payload.data).to.equal(true)
