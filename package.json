@@ -1,6 +1,6 @@
 {
   "name": "on-http-end",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Allows to capture HTTP response content and headers on request end.",
   "main": "index.js",
   "scripts": {
@@ -24,8 +24,8 @@
   "homepage": "https://github.com/jkyberneees/on-http-end#readme",
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^6.2.2",
-    "nyc": "^15.0.0",
-    "standard": "^14.3.1"
+    "mocha": "^7.1.1",
+    "nyc": "^15.0.1",
+    "standard": "^14.3.3"
   }
 }
