@@ -23,9 +23,9 @@
   },
   "homepage": "https://github.com/jkyberneees/on-http-end#readme",
   "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^7.1.1",
-    "nyc": "^15.0.1",
-    "standard": "^14.3.3"
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "nyc": "^15.1.0",
+    "standard": "^17.0.0"
   }
 }
