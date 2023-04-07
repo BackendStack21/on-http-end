@@ -4,6 +4,7 @@
   "description": "Allows to capture HTTP response content and headers on request end.",
   "main": "index.js",
   "scripts": {
+    "format": "standard --fix",
     "test": "nyc mocha test/*.test.js --exit"
   },
   "repository": {
@@ -25,7 +26,6 @@
   "devDependencies": {
     "chai": "^4.3.7",
     "mocha": "^10.2.0",
-    "nyc": "^15.1.0",
-    "standard": "^17.0.0"
+    "nyc": "^15.1.0"
   }
 }
