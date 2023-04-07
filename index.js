@@ -1,5 +1,5 @@
 module.exports = (res, cb) => {
-  res._parent = {
+  const parent = {
     write: res.write,
     end: res.end,
     content: undefined,
@@ -7,42 +7,42 @@ module.exports = (res, cb) => {
   }
 
   res.write = function (content) {
-    accumulate(res, content)
-    return res._parent.write.apply(res, arguments)
+    accumulate(parent, content)
+    return parent.write.apply(res, arguments)
   }
 
   res.end = function (content, encoding) {
-    if (!res._parent.ended) {
-      res._parent.ended = true
+    if (!parent.ended) {
+      parent.ended = true
 
-      accumulate(res, content)
+      accumulate(parent, content)
       const headers = res.getHeaders()
-      const payload = map(res.statusCode, headers, res._parent.content, encoding)
+      const payload = map(res.statusCode, headers, parent.content, encoding)
 
       setImmediate(() => {
         cb(payload)
       })
     }
 
-    return res._parent.end.apply(res, arguments)
+    return parent.end.apply(res, arguments)
   }
 }
 
 function map (status, headers, data, encoding) {
   return {
-    status: status,
-    headers: headers,
-    data: data,
+    status,
+    headers,
+    data,
     encoding: typeof encoding === 'string' ? encoding : null
   }
 }
 
-function accumulate (res, content) {
+function accumulate (parent, content) {
   if (content) {
     if (typeof content === 'string') {
-      res._parent.content = (res._parent.content || '') + content
+      parent.content = (parent.content || '') + content
     } else if (Buffer.isBuffer(content)) {
-      let oldContent = res._parent.content
+      let oldContent = parent.content
 
       if (typeof oldContent === 'string') {
         oldContent = Buffer.from(oldContent)
@@ -50,9 +50,9 @@ function accumulate (res, content) {
         oldContent = Buffer.alloc(0)
       }
 
-      res._parent.content = Buffer.concat([oldContent, content], oldContent.length + content.length)
+      parent.content = Buffer.concat([oldContent, content], oldContent.length + content.length)
     } else {
-      res._parent.content = content
+      parent.content = content
     }
   }
 }

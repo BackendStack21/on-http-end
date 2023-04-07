@@ -39,6 +39,28 @@ describe('on-http-end', () => {
     res.end('world')
   })
 
+  it('should support multiple callback registrations', function (done) {
+    onFinished(res, (payload) => {
+      expect(payload.data).to.equal('hello world')
+      expect(data).to.equal('hello world')
+    })
+    onFinished(res, (payload) => {
+      expect(payload.data).to.equal('hello world')
+      expect(data).to.equal('hello world')
+    })
+    onFinished(res, (payload) => {
+      expect(payload.data).to.equal('hello world')
+      expect(data).to.equal('hello world')
+      done()
+    })
+
+    res.write(undefined)
+    res.write('h')
+    res.write(Buffer.from('ello'))
+    res.write(' ')
+    res.end('world')
+  })
+
   it('should accumulate content and encoding', function (done) {
     onFinished(res, (payload) => {
       expect(payload.encoding).to.equal('utf-8')
