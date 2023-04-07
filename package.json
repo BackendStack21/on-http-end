@@ -1,6 +1,6 @@
 {
   "name": "on-http-end",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Allows to capture HTTP response content and headers on request end.",
   "main": "index.js",
   "scripts": {
